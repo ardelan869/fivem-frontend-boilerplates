@@ -1,0 +1,200 @@
+@import '../Utils.scss';
+
+// right-to-left
+.rtl-slide-enter {
+	transform: translateX(2vh);
+	opacity: 0;
+}
+
+.rtl-slide-enter-active {
+	transform: translateX(0);
+	opacity: 1;
+	transition: opacity 300ms, transform 300ms;
+}
+
+.rtl-slide-exit {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.rtl-slide-exit-active {
+	transform: translateX(2vh);
+	opacity: 0;
+	transition: opacity 300ms, transform 300ms;
+}
+
+// left-to-right
+.ltr-slide-enter {
+	transform: translateX(-2vh);
+	opacity: 0;
+}
+
+.ltr-slide-enter-active {
+	transform: translateX(0);
+	opacity: 1;
+	transition: opacity 300ms, transform 300ms;
+}
+
+.ltr-slide-exit {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+.ltr-slide-exit-active {
+	transform: translateX(-2vh);
+	opacity: 0;
+	transition: opacity 300ms, transform 300ms;
+}
+
+// top-to-bottom
+.ttb-slide-enter {
+	transform: translateY(-20vh);
+	opacity: 0;
+}
+
+.ttb-slide-enter-active {
+	transform: translateY(0);
+	opacity: 1;
+	transition: opacity 300ms, transform 300ms;
+}
+
+.ttb-slide-exit {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.ttb-slide-exit-active {
+	transform: translateY(-20vh);
+	opacity: 0;
+	transition: opacity 300ms, transform 300ms;
+}
+
+// bottom-to-top
+.btt-slide-enter {
+	transform: translateY(20vh);
+	opacity: 0;
+}
+
+.btt-slide-enter-active {
+	transform: translateY(0);
+	opacity: 1;
+	transition: opacity 300ms, transform 300ms;
+}
+
+.btt-slide-exit {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.btt-slide-exit-active {
+	transform: translateY(20vh);
+	opacity: 0;
+	transition: opacity 300ms, transform 300ms;
+}
+// Fade
+.fade-enter {
+	opacity: 0;
+}
+
+.fade-enter-active {
+	opacity: 1;
+	transition: opacity 300ms;
+}
+
+.fade-exit {
+	opacity: 1;
+}
+
+.fade-exit-active {
+	opacity: 0;
+	transition: opacity 300ms;
+}
+
+// Garage | Info Modal
+.info-modal-enter {
+	opacity: 0;
+	transform: translateX(vmin(366));
+}
+
+.info-modal-enter-active {
+	opacity: 1;
+	transform: translateX(0);
+	transition: opacity 300ms, transform 300ms;
+}
+
+.info-modal-exit {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.info-modal-exit-active {
+	opacity: 0;
+	transform: translateX(vmin(366));
+	transition: opacity 300ms, transform 300ms;
+}
+
+// Garage | Container
+.garage-container-enter {
+	align-self: flex-start;
+	transform: translateX(vmin(-200));
+}
+
+.garage-container-enter-active {
+	transform: translateX(0);
+	transition: transform 300ms;
+}
+
+.garage-container-exit {
+	transform: translateX(0);
+}
+
+.garage-container-exit-active {
+	align-self: flex-start;
+	transform: translateX(vmin(-200));
+	transition: transform 300ms;
+}
+
+// Scale Up/Down
+.scale-enter {
+	opacity: 0;
+	transform: scale(1.2);
+}
+
+.scale-enter-active {
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 300ms, transform 300ms;
+}
+
+.scale-exit {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.scale-exit-active {
+	opacity: 0;
+	transform: scale(1.2);
+	transition: opacity 300ms, transform 300ms;
+}
+
+// Clothing
+.clothingstore-enter {
+	opacity: 0;
+	transform: translateX(0);
+}
+
+.clothingstore-enter-active {
+	opacity: 1;
+	transform: translateX(vmin(-200));
+	transition: opacity 300ms, transform 300ms;
+}
+
+.clothingstore-exit {
+	opacity: 1;
+}
+
+.clothingstore-exit-active {
+	opacity: 0;
+	transform: translateX(vmin(-200));
+	transition: opacity 300ms, transform 300ms;
+}
