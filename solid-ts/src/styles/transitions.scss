@@ -1,0 +1,70 @@
+// right-to-left
+.rtl-slide-enter-active,
+.rtl-slide-exit-active {
+	transition: opacity 300ms, transform 300ms;
+}
+
+.rtl-slide-enter,
+.rtl-slide-exit-to {
+	transform: translateX(2vh);
+	opacity: 0;
+}
+
+// left-to-right
+.ltr-slide-enter-active,
+.ltr-slide-exit-active {
+	transition: opacity 300ms, transform 300ms;
+}
+
+.ltr-slide-enter,
+.ltr-slide-exit-to {
+	transform: translateX(-2vh);
+	opacity: 0;
+}
+
+// top-to-bottom
+.ttb-slide-enter-active,
+.ttb-slide-exit-active {
+	transition: opacity 300ms, transform 300ms;
+}
+
+.ttb-slide-enter,
+.ttb-slide-exit-to {
+	transform: translateX(-20vh);
+	opacity: 0;
+}
+
+// bottom-to-top
+.btt-slide-enter-active,
+.btt-slide-exit-active {
+	transition: opacity 300ms, transform 300ms;
+}
+
+.btt-slide-enter,
+.btt-slide-exit-to {
+	transform: translateX(20vh);
+	opacity: 0;
+}
+
+// Fade
+.fade-enter-active,
+.fade-exit-active {
+	transition: opacity 300ms;
+}
+
+.fade-enter,
+.fade-exit-to {
+	opacity: 0;
+}
+
+// Scale Up/Down
+.scale-enter-active,
+.scale-exit-active {
+	transition: opacity 300ms, transform 300ms;
+}
+
+.scale-enter,
+.scale-exit-to {
+	opacity: 0;
+	transform: scale(1.2);
+}
