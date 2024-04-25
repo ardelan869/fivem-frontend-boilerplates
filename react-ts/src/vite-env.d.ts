@@ -11,5 +11,3 @@ interface DebugEvent<T = unknown> {
 	action: string;
 	data: T;
 }
-
-type HexColor = `#${string}`;

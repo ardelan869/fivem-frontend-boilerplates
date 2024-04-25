@@ -5,8 +5,4 @@ import './styles/index.scss';
 
 if (isEnvBrowser) document.body.style.backgroundColor = '#1A1A1A';
 
-ReactDOM.createRoot(document.body!).render(
-	<>
-		Hello World
-	</>
-);
+ReactDOM.createRoot(document.body!).render(<>Hello World</>);
