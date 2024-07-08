@@ -1,4 +1,4 @@
-import { isEnvBrowser } from './constants';
+import { isEnvBrowser } from '@/lib/constants';
 
 export const addZero = (i: number): string | number => (i < 10 ? `0${i}` : i);
 

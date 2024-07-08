@@ -1,4 +1,4 @@
-// right-to-left
+/* right-to-left */
 .rtl-slide-enter {
 	transform: translateX(2vh);
 	opacity: 0;
@@ -21,7 +21,7 @@
 	transition: opacity 300ms, transform 300ms;
 }
 
-// left-to-right
+/* left-to-right */
 .ltr-slide-enter {
 	transform: translateX(-2vh);
 	opacity: 0;
@@ -44,7 +44,7 @@
 	transition: opacity 300ms, transform 300ms;
 }
 
-// top-to-bottom
+/* top-to-bottom */
 .ttb-slide-enter {
 	transform: translateY(-20vh);
 	opacity: 0;
@@ -67,7 +67,7 @@
 	transition: opacity 300ms, transform 300ms;
 }
 
-// bottom-to-top
+/* bottom-to-top */
 .btt-slide-enter {
 	transform: translateY(20vh);
 	opacity: 0;
@@ -89,7 +89,8 @@
 	opacity: 0;
 	transition: opacity 300ms, transform 300ms;
 }
-// Fade
+
+/* Fade */
 .fade-enter {
 	opacity: 0;
 }
@@ -108,7 +109,7 @@
 	transition: opacity 300ms;
 }
 
-// Scale Up/Down
+/* Scale Up/Down */
 .scale-enter {
 	opacity: 0;
 	transform: scale(1.2);

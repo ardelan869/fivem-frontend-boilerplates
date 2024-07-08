@@ -1,37 +1,18 @@
-import {
-	createEffect,
-	createSignal,
-	onCleanup,
-} from 'solid-js';
-import { noop } from './constants';
+import { useEvent } from '@/lib/hooks';
 
 export const useKeyEvent = (
-	action: 'keydown' | 'keyup',
-	key: string,
-	handler: (data: KeyboardEvent) => void,
-) => {
-	const [savedHandler, setSavedHandler] =
-		createSignal<(data: KeyboardEvent) => void>(noop);
-
-	createEffect(() => {
-		setSavedHandler(() => handler);
-	});
-
-	createEffect(() => {
-		const keyListener = (event: KeyboardEvent) => {
-			if (savedHandler() && event.key === key) savedHandler()(event);
-		};
-
-		window.addEventListener(action, keyListener);
-
-		onCleanup(() => window.removeEventListener(action, keyListener));
-	});
-};
+  action: 'keydown' | 'keyup',
+  key: string,
+  handler: (data: KeyboardEvent) => void
+) =>
+  useEvent(action, (e) => {
+    if (e.key === key) handler(e);
+  });
 
 export const useKeyUp = (key: string, handler: (data: KeyboardEvent) => void) =>
-	useKeyEvent('keyup', key, handler);
+  useKeyEvent('keyup', key, handler);
 
 export const useKeyDown = (
-	key: string,
-	handler: (data: KeyboardEvent) => void,
+  key: string,
+  handler: (data: KeyboardEvent) => void
 ) => useKeyEvent('keydown', key, handler);

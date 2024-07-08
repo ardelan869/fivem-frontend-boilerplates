@@ -1,56 +1,29 @@
-import { MutableRefObject, useEffect, useRef } from 'react';
-import { noop } from './constants';
+import { useEffect, useRef } from 'react';
+import { noop } from '@/lib/constants';
 
-export const dragScroll = (slider: HTMLElement): void => {
-	let isDown = false;
-	let startX: number;
-	let scrollLeft: number;
+export const useEvent = <T extends EventKeys>(
+  event: T,
+  callback: EventCallback<T>
+) => {
+  const savedHandler = useRef<EventCallback<T>>(noop);
 
-	const handleMouseDown = (e: MouseEvent): void => {
-		isDown = true;
-		startX = e.pageX - slider.getBoundingClientRect().left;
-		scrollLeft = slider.scrollLeft;
-	};
+  useEffect(() => {
+    savedHandler.current = callback;
+  }, [callback]);
 
-	const handleMouseUp = () => (isDown = false);
-	const handleMouseLeave = () => (isDown = false);
+  useEffect(() => {
+    window.addEventListener(event, callback);
 
-	const handleMouseMove = ({ pageX, preventDefault }: MouseEvent): void => {
-		if (!isDown) return;
-
-		preventDefault();
-
-		slider.scrollLeft =
-			scrollLeft - (pageX - slider.getBoundingClientRect().left - startX);
-	};
-
-	slider.addEventListener('mousedown', handleMouseDown);
-	slider.addEventListener('mouseup', handleMouseUp);
-	slider.addEventListener('mouseleave', handleMouseLeave);
-	slider.addEventListener('mousemove', handleMouseMove);
-	slider.classList.add('scroll-drag');
+    return () => window.removeEventListener(event, callback);
+  }, [event, callback]);
 };
 
 export const useNuiEvent = <T = any>(
-	action: string,
-	handler: NuiHandlerSignature<T>,
-) => {
-	const savedHandler: MutableRefObject<NuiHandlerSignature<T>> = useRef(noop);
+  action: string,
+  handler: NuiHandlerSignature<T>
+) =>
+  useEvent('message', (event) => {
+    const { data } = event;
 
-	useEffect(() => {
-		savedHandler.current = handler;
-	}, [handler]);
-
-	useEffect(() => {
-		const eventListener = (event: MessageEvent): void => {
-			const { data } = event;
-
-			if (savedHandler.current && data.action === action)
-				savedHandler.current(data.data as T);
-		};
-
-		window.addEventListener('message', eventListener);
-
-		return () => window.removeEventListener('message', eventListener);
-	}, [action, handler]);
-};
+    if (data.action === action) handler(data.data as T);
+  });

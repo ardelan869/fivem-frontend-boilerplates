@@ -1,4 +1,4 @@
-import { isEnvBrowser } from './constants';
+import { isEnvBrowser } from '@/lib/constants';
 
 export const addZero = (i: number): string | number => (i < 10 ? `0${i}` : i);
 
@@ -18,7 +18,7 @@ export async function fetchNui<T = any>(
 
   const resp = await fetch(`https://${resourceName}/${event}`, {
     method: 'POST',
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   return await resp.json();
@@ -37,7 +37,7 @@ export const parseMinutes = (time: number): string => {
 };
 
 export const debugData = <P>(events: DebugEvent<P>[], timer = 1000) => {
-  if (import.meta.env.MODE !== 'development' || !isEnvBrowser) return;
+  if (process.env.NODE_ENV !== 'development' || !isEnvBrowser) return;
 
   for (const { action, data } of events)
     setTimeout(() => window.postMessage({ action, data }), timer);
