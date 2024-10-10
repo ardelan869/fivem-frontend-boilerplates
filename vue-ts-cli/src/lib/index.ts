@@ -18,7 +18,7 @@ export async function fetchNui<T = any>(
 
 	const resp = await fetch(`https://${resourceName}/${event}`, {
 		method: 'POST',
-		body: JSON.stringify(data),
+		body: JSON.stringify(data)
 	});
 
 	return await resp.json();
