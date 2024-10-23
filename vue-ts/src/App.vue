@@ -12,7 +12,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import './utils.scss', './transitions.scss';
+@use 'utils.scss';
+@use 'transitions.scss';
 
 *,
 *::after,
