@@ -2,6 +2,9 @@ import { useEvent } from '@/lib/hooks';
 
 const ALL = ['all', '*', ''];
 
+/**
+ * Adds either a keydown or keyup event listener to the window.
+ */
 export function useKeyEvent(
   action: 'keydown' | 'keyup',
   key: string | string[],
@@ -38,12 +41,18 @@ export function useKeyEvent(
   });
 }
 
+/**
+ * Adds a keyup event listener to the window.
+ */
 export const useKeyUp = (
   key: Parameters<typeof useKeyEvent>[1],
   handler: Parameters<typeof useKeyEvent>[2],
   options?: Parameters<typeof useKeyEvent>[3]
 ) => useKeyEvent('keyup', key, handler, options);
 
+/**
+ * Adds a keydown event listener to the window.
+ */
 export const useKeyDown = (
   key: Parameters<typeof useKeyEvent>[1],
   handler: Parameters<typeof useKeyEvent>[2],

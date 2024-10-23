@@ -6,6 +6,9 @@ declare global {
   }
 }
 
+/**
+ * Fetches and or emits data to the Nui resource.
+ */
 export async function fetchNui<T = unknown>(
   event: string,
   data?: any,
@@ -28,6 +31,9 @@ export async function fetchNui<T = unknown>(
   return await resp.json();
 }
 
+/**
+ * Triggers `useNuiEvent` listeners, if the current environment is a browser.
+ */
 export function debugData<P>(events: DebugEvent<P>[], timer = 1000) {
   if (!import.meta.env.DEV || !isEnvBrowser) return;
 
