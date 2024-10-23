@@ -1,8 +1,14 @@
 import { isEnvBrowser } from '@/lib/constants';
 
+declare global {
+  interface Window {
+    GetParentResourceName?: () => string;
+  }
+}
+
 export const addZero = (i: number): string | number => (i < 10 ? `0${i}` : i);
 
-export async function fetchNui<T = any>(
+export async function fetchNui<T = unknown>(
   event: string,
   data?: any,
   mockData?: T
@@ -12,8 +18,8 @@ export async function fetchNui<T = any>(
     return;
   }
 
-  const resourceName: string = (window as any).GetParentResourceName
-    ? (window as any).GetParentResourceName()
+  const resourceName: string = window.GetParentResourceName
+    ? window.GetParentResourceName()
     : 'nui-resource';
 
   const resp = await fetch(`https://${resourceName}/${event}`, {
