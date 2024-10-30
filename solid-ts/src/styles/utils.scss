@@ -1,3 +1,5 @@
+@use 'sass:meta' as *;
+
 @function vh($value) {
   @if type-of($value) == number {
     @return 0.09259259259259259vh * $value;
