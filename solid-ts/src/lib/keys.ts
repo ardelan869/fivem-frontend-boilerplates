@@ -22,10 +22,15 @@ export function useKeyEvent(
       : key.map((k) => k.toUpperCase());
 
   useEvent(action, (e) => {
-    const modifiersMatch = Object.entries(options).some(
-      ([modifier, required]) =>
-        required ? e[modifier as keyof typeof e] : true
+    const hasModifierOptions = Object.values(options).some(
+      (value) => value !== undefined
     );
+
+    const modifiersMatch = hasModifierOptions
+      ? Object.entries(options).some(([modifier, required]) =>
+          required ? e[modifier as keyof typeof e] : true
+        )
+      : true;
 
     if (!modifiersMatch) return;
 
