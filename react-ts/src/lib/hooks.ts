@@ -42,5 +42,25 @@ export function useNuiEvent<T = any>(
 export function useDebugData<P>(events: DebugEvent<P>[], timer = 1000) {
   useEffect(() => {
     debugData(events, timer);
-  }, [events, timer]);
+  }, []);
+}
+
+/**
+ * Triggers when something outside the ref has been triggered
+ */
+export function useOutsideClick<T extends HTMLElement>(
+  ref: React.RefObject<T>,
+  handler: (event: MouseEvent) => void
+) {
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        handler(event);
+      }
+    };
+
+    window.addEventListener('click', handleClick);
+
+    return () => window.removeEventListener('click', handleClick);
+  }, [ref, handler]);
 }
