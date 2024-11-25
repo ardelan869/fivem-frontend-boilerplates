@@ -1,5 +1,4 @@
-@use 'utils.scss';
-@use 'transitions.scss';
+@import url('transitions.scss');
 
 *,
 *::after,
@@ -26,6 +25,8 @@ html {
 body {
   display: grid;
   place-items: center;
+
+  line-height: 1;
 }
 
 a,
