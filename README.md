@@ -31,7 +31,7 @@ This boilerplate includes a set of helpful libraries (`/lib`) to make your devel
 
 - **`vw: (i: number) => string`**  
   Converts a number (representing `px`) to a `vw` (viewport width) value.  
-  _Example: `vw(50px)` returns `"4.6296vmin"`_
+  _Example: `vw(50)` returns `"4.6296vmin"`_
 
 - **`vmin: (i: number) => string`**  
   Converts a number (representing `px`) to a `vmin` value (smallest viewport dimension).  
