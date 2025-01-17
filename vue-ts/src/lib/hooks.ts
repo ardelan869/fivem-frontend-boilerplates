@@ -1,4 +1,4 @@
-import { onMounted } from 'vue';
+import { onBeforeUnmount, onMounted, type Ref } from 'vue';
 import { debugData } from '@/lib';
 
 /**
@@ -31,5 +31,37 @@ export function useNuiEvent<T = any>(
 export function useDebugData<P>(events: DebugEvent<P>[], timer = 1000) {
   onMounted(() => {
     debugData(events, timer);
+  });
+}
+
+/**
+ * Triggers when something outside the ref has been triggered
+ */
+export function useOutsideClick<T extends HTMLElement>(
+  ref: Ref<T | null>,
+  handler: (event: MouseEvent) => void
+) {
+  const handleClick = (event: MouseEvent) => {
+    if (ref.value) {
+      const rect = ref.value.getBoundingClientRect();
+      const { clientX, clientY } = event;
+
+      if (
+        clientX < rect.left ||
+        clientX > rect.right ||
+        clientY < rect.top ||
+        clientY > rect.bottom
+      ) {
+        handler(event);
+      }
+    }
+  };
+
+  onMounted(() => {
+    window.addEventListener('click', handleClick);
+  });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('click', handleClick);
   });
 }
