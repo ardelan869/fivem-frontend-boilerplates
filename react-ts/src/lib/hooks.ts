@@ -54,7 +54,19 @@ export function useOutsideClick<T extends HTMLElement>(
 ) {
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      if (!ref.current) {
+        return;
+      }
+
+      const rect = ref.current.getBoundingClientRect();
+      const { clientX, clientY } = event;
+
+      if (
+        clientX < rect.left ||
+        clientX > rect.right ||
+        clientY < rect.top ||
+        clientY > rect.bottom
+      ) {
         handler(event);
       }
     };
