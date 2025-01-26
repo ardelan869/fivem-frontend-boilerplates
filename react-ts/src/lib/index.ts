@@ -28,6 +28,10 @@ export async function fetchNui<T = unknown>(
     body: JSON.stringify(data)
   });
 
+  if (!resp.ok) {
+    return;
+  }
+
   return await resp.json();
 }
 
