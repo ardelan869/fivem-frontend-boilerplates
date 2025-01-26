@@ -16,10 +16,14 @@ export function useEvent<T extends EventKeys>(
   }, [callback]);
 
   useEffect(() => {
-    window.addEventListener(event, callback);
+    const listener = (event: Event) => {
+      savedHandler.current?.(event);
+    };
 
-    return () => window.removeEventListener(event, callback);
-  }, [event, callback]);
+    window.addEventListener(event, listener);
+
+    return () => window.removeEventListener(event, listener);
+  }, [event]);
 }
 
 /**
@@ -29,10 +33,16 @@ export function useNuiEvent<T = any>(
   action: string,
   handler: NuiHandlerSignature<T>
 ) {
+  const savedHandler = useRef<NuiHandlerSignature<T>>(noop);
+
+  useEffect(() => {
+    savedHandler.current = handler;
+  }, [handler]);
+
   useEvent('message', (event) => {
     const { data } = event;
 
-    if (data.action === action) handler(data.data as T);
+    if (data.action === action) savedHandler?.current?.(data.data as T);
   });
 }
 
@@ -52,6 +62,12 @@ export function useOutsideClick<T extends HTMLElement>(
   ref: React.RefObject<T>,
   handler: (event: MouseEvent) => void
 ) {
+  const savedHandler = useRef<(event: MouseEvent) => void>(noop);
+
+  useEffect(() => {
+    savedHandler.current = handler;
+  }, [handler]);
+
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       if (!ref.current) {
@@ -67,12 +83,12 @@ export function useOutsideClick<T extends HTMLElement>(
         clientY < rect.top ||
         clientY > rect.bottom
       ) {
-        handler(event);
+        savedHandler?.current?.(event);
       }
     };
 
     window.addEventListener('click', handleClick);
 
     return () => window.removeEventListener('click', handleClick);
-  }, [ref, handler]);
+  }, [ref]);
 }
