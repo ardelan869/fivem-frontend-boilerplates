@@ -15,6 +15,5 @@ interface DebugEvent<T = unknown> {
 type EventKeys = keyof WindowEventMap;
 
 type EventCallback<T extends EventKeys = EventKeys> = (
-  this: Window,
   ev: WindowEventMap[T]
 ) => any;

@@ -16,8 +16,8 @@ export function useEvent<T extends EventKeys>(
   }, [callback]);
 
   useEffect(() => {
-    const listener = (event: Event) => {
-      savedHandler.current?.(event);
+    const listener = (event: Parameters<EventCallback<T>>[0]) => {
+      savedHandler.current(event);
     };
 
     window.addEventListener(event, listener);
@@ -25,6 +25,7 @@ export function useEvent<T extends EventKeys>(
     return () => window.removeEventListener(event, listener);
   }, [event]);
 }
+
 
 /**
  * Listens to a Nui event.
