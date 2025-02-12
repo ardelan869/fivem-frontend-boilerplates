@@ -1,18 +1,10 @@
 import path from 'path';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
-
-const rcConfig = {};
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler', rcConfig]]
-      }
-    })
-  ],
+  plugins: [react({})],
   base: './',
   resolve: {
     alias: {

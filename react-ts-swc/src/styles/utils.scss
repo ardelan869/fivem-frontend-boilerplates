@@ -1,0 +1,25 @@
+@use 'sass:meta' as *;
+
+@function vh($value) {
+  @if type-of($value) == number {
+    @return 0.09259259259259259vh * $value;
+  } @else {
+    @return calc(0.09259259259259259vh * #{$value});
+  }
+}
+
+@function vmin($value) {
+  @if type-of($value) == number {
+    @return 0.09259259259259259vmin * $value;
+  } @else {
+    @return calc(0.09259259259259259vmin * #{$value});
+  }
+}
+
+@function vw($value) {
+  @if type-of($value) == number {
+    @return 0.05208vw * $value;
+  } @else {
+    @return calc(0.05208vw * #{$value});
+  }
+}
