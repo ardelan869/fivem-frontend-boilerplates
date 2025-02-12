@@ -79,10 +79,29 @@ export function useOutsideClick<T extends HTMLElement>(
       }
     };
 
-    window.addEventListener('click', handleClick);
+    window.addEventListener('mousedown', handleClick);
 
     onCleanup(() => {
-      window.removeEventListener('click', handleClick);
+      window.removeEventListener('mousedown', handleClick);
     });
   });
+}
+
+/**
+ * Returns a debounced version of the given value.
+ */
+export function useDebounce<T>(value: T, delay = 500): Accessor<T> {
+  const [debouncedValue, setDebouncedValue] = createSignal(value);
+
+  createEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(() => value);
+    }, delay);
+
+    onCleanup(() => {
+      clearTimeout(timer);
+    });
+  });
+
+  return debouncedValue;
 }

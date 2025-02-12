@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted, type Ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref, watch, type Ref } from 'vue';
 import { debugData } from '@/lib';
 
 /**
@@ -58,10 +58,36 @@ export function useOutsideClick<T extends HTMLElement>(
   };
 
   onMounted(() => {
-    window.addEventListener('click', handleClick);
+    window.addEventListener('mousedown', handleClick);
   });
 
   onBeforeUnmount(() => {
-    window.removeEventListener('click', handleClick);
+    window.removeEventListener('mousedown', handleClick);
   });
+}
+
+/**
+ * Returns a debounced version of the given value.
+ */
+export function useDebounce<T>(value: T, delay = 500): Ref<T> {
+  const debouncedValue = ref(value) as Ref<T>; // 💡 Casten auf Ref<T>
+
+  let timer: ReturnType<typeof setTimeout> | null = null;
+
+  watch(
+    () => value,
+    (newValue) => {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        debouncedValue.value = newValue;
+      }, delay);
+    },
+    { immediate: true }
+  );
+
+  onBeforeUnmount(() => {
+    if (timer) clearTimeout(timer);
+  });
+
+  return debouncedValue;
 }

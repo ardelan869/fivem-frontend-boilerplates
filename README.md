@@ -53,17 +53,13 @@ This boilerplate includes a set of helpful libraries (`/lib`) to make your devel
   Similar to `debugData`, but wrapped inside a `useEffect` (React) or `onMount` (Vue/Solid) hook.  
   _Example: Use this for triggering debug events in the browser environment._
 
----
+- **`useOutsideClick: <T extends HTMLElement>(ref: React.RefObject<T>, handler: (event: MouseEvent) => void) => void`**  
+  Calls the `handler` function when a click occurs outside the referenced element.  
+  _Example: Close a dropdown when clicking outside of it._
 
-### 🌐 `/index`
-
-- **`fetchNui<T = unknown>(event: string, data?: any, mockData?: T) => Promise<void | T>`**  
-  Fetches or emits data to the Nui resource.  
-  _Example: `fetchNui("getPlayerData", { id: 1 })`_
-
-- **`debugData<P>(events: DebugEvent<P>[], timer?: number) => void`**  
-  Triggers `useNuiEvent` listeners when in a browser environment for debugging.  
-  _Example: Simulate Nui events during development using this function._
+- **`useDebounce: <T>(value: T, delay = 500) => T`**  
+  Returns a debounced version of the given `value`.  
+  _Example: Prevent excessive API calls by debouncing user input._
 
 ---
 

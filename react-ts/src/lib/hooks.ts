@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { noop } from '@/lib/constants';
 import { debugData } from '@/lib';
 
@@ -88,8 +88,25 @@ export function useOutsideClick<T extends HTMLElement>(
       }
     };
 
-    window.addEventListener('click', handleClick);
+    window.addEventListener('mousedown', handleClick);
 
-    return () => window.removeEventListener('click', handleClick);
+    return () => window.removeEventListener('mousedown', handleClick);
   }, [ref]);
 }
+
+/**
+ * Debounces the value.
+ */
+export const useDebounce = <T>(value: T, delay = 500) => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
