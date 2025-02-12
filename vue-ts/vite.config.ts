@@ -1,26 +1,32 @@
-import { fileURLToPath, URL } from 'node:url';
-
-import { defineConfig } from 'vite';
+import path from 'path';
 import vue from '@vitejs/plugin-vue';
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  base: './',
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '~': fileURLToPath(new URL('./', import.meta.url)),
-    },
+      '@': path.resolve(__dirname, './src'),
+      '~': path.resolve(__dirname, './')
+    }
   },
-  base: './',
   build: {
     outDir: './dist',
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`
+      }
+    }
   },
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler', // or 'modern'
-      },
-    },
+        api: 'modern-compiler' // or 'modern'
+      }
+    }
   }
 });

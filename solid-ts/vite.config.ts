@@ -11,12 +11,19 @@ export default defineConfig({
     solid(),
   ],
   base: './',
-  build: {
-    outDir: './dist',
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    outDir: './dist',
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`,
+      },
     },
   },
   css: {
@@ -25,5 +32,5 @@ export default defineConfig({
         api: 'modern-compiler', // or 'modern'
       },
     },
-  }
+  },
 });

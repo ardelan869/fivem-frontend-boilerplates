@@ -11,7 +11,7 @@ declare global {
  */
 export async function fetchNui<T = unknown>(
   event: string,
-  data?: any,
+  data?: unknown,
   mockData?: T
 ): Promise<void | T> {
   if (isEnvBrowser) {

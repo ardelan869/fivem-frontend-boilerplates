@@ -1,4 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import { isEnvBrowser } from '@/lib/constants';
 
-createApp(App).mount('body')
+import App from '@/App.vue';
+
+if (isEnvBrowser) document.body.style.backgroundColor = '#1A1A1A';
+
+createApp(App).mount('body');

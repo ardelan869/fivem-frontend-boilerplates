@@ -7,7 +7,7 @@ import { debugData } from '@/lib';
  */
 export function useEvent<T extends EventKeys>(
   event: T,
-  callback: EventCallback<T>
+  callback: EventCallback<T>,
 ) {
   const savedHandler = useRef<EventCallback<T>>(noop);
 
@@ -26,13 +26,12 @@ export function useEvent<T extends EventKeys>(
   }, [event]);
 }
 
-
 /**
  * Listens to a Nui event.
  */
-export function useNuiEvent<T = any>(
+export function useNuiEvent<T = unknown>(
   action: string,
-  handler: NuiHandlerSignature<T>
+  handler: NuiHandlerSignature<T>,
 ) {
   const savedHandler = useRef<NuiHandlerSignature<T>>(noop);
 
@@ -53,6 +52,7 @@ export function useNuiEvent<T = any>(
 export function useDebugData<P>(events: DebugEvent<P>[], timer = 1000) {
   useEffect(() => {
     debugData(events, timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
 
@@ -61,7 +61,7 @@ export function useDebugData<P>(events: DebugEvent<P>[], timer = 1000) {
  */
 export function useOutsideClick<T extends HTMLElement>(
   ref: React.RefObject<T>,
-  handler: (event: MouseEvent) => void
+  handler: (event: MouseEvent) => void,
 ) {
   const savedHandler = useRef<(event: MouseEvent) => void>(noop);
 
